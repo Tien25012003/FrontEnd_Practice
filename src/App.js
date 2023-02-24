@@ -11,10 +11,10 @@ const App = () => {
   return (
     <>
       <StatusBar barStyle={'dark-content'} backgroundColor={'transparent'} translucent />
-      {/* <NavigationRoot /> */}
+      <NavigationRoot />
       {/* <Rocket_Index /> */}
       {/* <Login_Index /> */}
-      <Food_Index />
+      {/* <Food_Index /> */}
     </>
   );
 };
