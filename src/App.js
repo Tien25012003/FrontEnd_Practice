@@ -1,12 +1,21 @@
 import { View, Text, StatusBar } from "react-native";
 import React from "react";
-
+import Profile from "./PracticeUI/TabNavigationUI/screens/Profile"
+import Home from "./PracticeUI/TabNavigationUI/screens/Home"
+import { Provider } from 'react-redux';
+import NavigationRoot from "./PracticeUI/TabNavigationUI/NavigationRoot";
+import Rocket_Index from "./PracticeUI/RocketUI/Rocket_Index";
+import Login_Index from "./PracticeUI/LoginUI/Login_Index";
+import Food_Index from "./PracticeUI/FoodDeliveryUI/Food_Index";
 const App = () => {
   return (
-    <View>
+    <>
       <StatusBar barStyle={'dark-content'} backgroundColor={'transparent'} translucent />
-      <Text>App</Text>
-    </View>
+      {/* <NavigationRoot /> */}
+      {/* <Rocket_Index /> */}
+      {/* <Login_Index /> */}
+      <Food_Index />
+    </>
   );
 };
 
