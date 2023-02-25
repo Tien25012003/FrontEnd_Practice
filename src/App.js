@@ -7,14 +7,16 @@ import NavigationRoot from "./PracticeUI/TabNavigationUI/NavigationRoot";
 import Rocket_Index from "./PracticeUI/RocketUI/Rocket_Index";
 import Login_Index from "./PracticeUI/LoginUI/Login_Index";
 import Food_Index from "./PracticeUI/FoodDeliveryUI/Food_Index";
+import Calculator_Index from "./PracticeUI/CalculatorUI/Calculator_Index";
 const App = () => {
   return (
     <>
-      <StatusBar barStyle={'dark-content'} backgroundColor={'transparent'} translucent />
-      <NavigationRoot />
+      {/* <StatusBar barStyle={'dark-content'} backgroundColor={'transparent'} translucent /> */}
+      {/* <NavigationRoot /> */}
       {/* <Rocket_Index /> */}
       {/* <Login_Index /> */}
       {/* <Food_Index /> */}
+      <Calculator_Index />
     </>
   );
 };
