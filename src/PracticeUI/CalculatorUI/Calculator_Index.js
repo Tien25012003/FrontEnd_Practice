@@ -94,7 +94,7 @@ const Calculator_Index = () => {
     };
 
     const onPressSpecialOperators = (item) => {
-        console.log("render");
+        //console.log("render");
         setFlag(false);
         if (item === "AC") {
             setOperator("");
