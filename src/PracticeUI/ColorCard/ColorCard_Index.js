@@ -1,4 +1,4 @@
-import { View, Text, Dimensions, Pressable, useAnimatedValue } from "react-native";
+import { View, Text, Dimensions, Pressable } from "react-native";
 import React, { useState, useEffect } from "react";
 import { BLACK_COLORS, GREEN_COLORS, BLUE_COLORS, PURPLE_COLORS, PINK_COLORS, ORANGE_COLORS } from "./ColorData";
 import Animated, {
@@ -7,6 +7,7 @@ import Animated, {
     useSharedValue,
     interpolate,
     useAnimatedGestureHandler,
+    withSpring,
 } from 'react-native-reanimated';
 import { GestureHandlerRootView, PanGestureHandler } from "react-native-gesture-handler";
 const { width: WIDTH_SCREEN, height: HEIGHT_SCREEN } = Dimensions.get("screen");
@@ -20,71 +21,54 @@ const ColorCard_Index = () => {
     const blackAnimatedStyle = useAnimatedStyle(() => {
         return {
             transform: [{
-                rotate: `${interpolate(rotateAnimatedValue.value, [-WIDTH_SCREEN, 0, WIDTH_SCREEN], [-90, 0, 90])}deg`
+                rotate: `${interpolate(rotateAnimatedValue.value, [-BAR_HEIGHT, 0, BAR_HEIGHT], [-90, 0, 90])}deg`
             }],
         };
     });
     const greenAnimatedStyle = useAnimatedStyle(() => {
         return {
             transform: [{
-                rotate: `${interpolate(rotateAnimatedValue.value, [-WIDTH_SCREEN, 0, WIDTH_SCREEN], [-72, 0, 72])}deg`
+                rotate: `${interpolate(rotateAnimatedValue.value, [-BAR_HEIGHT, 0, BAR_HEIGHT], [-72, 0, 72])}deg`
             }],
         };
     });
     const blueAnimatedStyle = useAnimatedStyle(() => {
         return {
             transform: [{
-                rotate: `${interpolate(rotateAnimatedValue.value, [-WIDTH_SCREEN, 0, WIDTH_SCREEN], [-54, 0, 54])}deg`
+                rotate: `${interpolate(rotateAnimatedValue.value, [-BAR_HEIGHT, 0, BAR_HEIGHT], [-54, 0, 54])}deg`
             }],
         };
     });
     const purpleAnimatedStyle = useAnimatedStyle(() => {
         return {
             transform: [{
-                rotate: `${interpolate(rotateAnimatedValue.value, [-WIDTH_SCREEN, 0, WIDTH_SCREEN], [-36, 0, 36])}deg`
+                rotate: `${interpolate(rotateAnimatedValue.value, [-BAR_HEIGHT, 0, BAR_HEIGHT], [-36, 0, 36])}deg`
             }],
         };
     });
     const pinkAnimatedStyle = useAnimatedStyle(() => {
         return {
             transform: [{
-                rotate: `${interpolate(rotateAnimatedValue.value, [-WIDTH_SCREEN, 0, WIDTH_SCREEN], [-18, 0, 18])}deg`
+                rotate: `${interpolate(rotateAnimatedValue.value, [-BAR_HEIGHT, 0, BAR_HEIGHT], [-18, 0, 18])}deg`
             }],
         };
     });
     const panHandler = useAnimatedGestureHandler({
-        onStart: (e, ctx) => {
-            ctx.currentTranslateX = 0;
-        },
-        onActive: (e, ctx) => {
-            //console.log(ctx.currentTranslateX);
-            //console.log("eX " + e.translationX);
-            //console.log("eY " + e.translationY);
-            //rotateAnimatedValue.value = withTiming(e.translationX);
-            if (e.translationX >= 0 && e.translationY >= 0) {
-                if (e.translationX >= 150 && e.translationY >= 150) {
-                    rotateAnimatedValue.value = withTiming(WIDTH_SCREEN);
-                } else {
-                    rotateAnimatedValue.value = withTiming(e.translationX);
-                }
 
-            } else {
-                rotateAnimatedValue.value = withTiming(e.translationX);
-            }
+        onActive: (e, ctx) => {
+            rotateAnimatedValue.value = withTiming(e.translationX);
         },
         onEnd: (e, ctx) => {
-            //console.log(ctx.currentTranslateX);
-            //console.log("eX " + e.translationX);
-            //console.log("eY " + e.translationY);
-
-            if (e.translationX <= 0 || e.translationY <= 0) {
+            if (e.translationX > 0) {
+                rotateAnimatedValue.value = withSpring(BAR_HEIGHT);
+            } else {
                 rotateAnimatedValue.value = withTiming(0);
             }
         },
     });
     useEffect(() => {
         if (onActive === true) {
-            rotateAnimatedValue.value = withTiming(WIDTH_SCREEN);
+            rotateAnimatedValue.value = withSpring(BAR_HEIGHT);
         } else if (onActive === false) {
             rotateAnimatedValue.value = withTiming(0);
         }
