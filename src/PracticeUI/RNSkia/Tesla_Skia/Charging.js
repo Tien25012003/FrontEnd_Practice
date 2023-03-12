@@ -1,5 +1,5 @@
 import {View, Text, Dimensions, ScrollView, Pressable} from 'react-native';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   Canvas,
   Box,
@@ -17,6 +17,14 @@ import {
   RoundedRect,
   useFont,
   Text as TextSkia,
+  useLoop,
+  useComputedValue,
+  Easing,
+  mix,
+  useTiming,
+  useValue,
+  useValueEffect,
+  runTiming,
 } from '@shopify/react-native-skia';
 import {
   GestureHandlerRootView,
@@ -29,6 +37,7 @@ import Animated, {
   useDerivedValue,
   runOnJS,
   interpolate,
+  withTiming,
 } from 'react-native-reanimated';
 const {width: WIDTH_SCREEN, height: HEIGHT_SCREEN} = Dimensions.get('screen');
 const backPath =
@@ -40,11 +49,13 @@ const proceesBarPath =
 //console.log(WIDTH_SCREEN * 0.7);
 const Charging = () => {
   const [percent, setPercent] = useState(0);
+  const [valueProcessText, setValueProcessText] = useState(0);
   const imageSrc = useImage(require('./assets/whitecar.png'));
 
   const font = useFont(require('./Font/Roboto-Regular.ttf'), 30);
   const fontSlider = useFont(require('./Font/Roboto-Regular.ttf'), 15);
   const triangleSlider = useSharedValue(0);
+  const percentAnimatedValue = useSharedValue(0);
   const panHandler = useAnimatedGestureHandler({
     onStart: (e, ctx) => {
       ctx.value = triangleSlider.value;
@@ -73,14 +84,45 @@ const Charging = () => {
       transform: [{translateX: triangleSlider.value}],
     };
   });
+  const widthBarStyle = useAnimatedStyle(() => {
+    return {
+      width: percentAnimatedValue.value,
+    };
+  });
   const receiveValue = value => {
     setPercent(value);
+  };
+  const receivePercentText = value => {
+    setValueProcessText(value);
   };
   useDerivedValue(() => {
     runOnJS(receiveValue)(
       interpolate(triangleSlider.value, [0, WIDTH_SCREEN * 0.75], [0, 100]),
     );
   });
+
+  useEffect(() => {
+    percentAnimatedValue.value = 0;
+    percentAnimatedValue.value = withTiming(WIDTH_SCREEN - 50, {
+      duration: 5000,
+    });
+  }, [percent]);
+  useDerivedValue(() => {
+    runOnJS(receivePercentText)(
+      interpolate(
+        percentAnimatedValue.value,
+        [0, WIDTH_SCREEN - 50],
+        [0, 65],
+      ).toFixed(0),
+    );
+  });
+
+  // const valueLoop = useTiming({duration: 5000, easing: Easing.ease});
+  // const valueProcess = useComputedValue(
+  //   () => `${Math.floor(mix(percentAnimatedValue.value, 0, 100))}%`,
+  //   [percentAnimatedValue.value],
+  // );
+
   return (
     <GestureHandlerRootView
       style={{
@@ -198,8 +240,72 @@ const Charging = () => {
               //borderColor: 'white',
               marginTop: 0,
               alignItems: 'center',
-              justifyContent: 'flex-end',
+              //justifyContent: 'flex-end',
             }}>
+            {/* Animated Slide Bar */}
+            <Animated.View
+              style={[
+                {
+                  position: 'absolute',
+                  width: WIDTH_SCREEN,
+                  height: 130,
+                  //borderWidth: 1,
+                  //borderColor: 'red',
+                  top: 0,
+                  left: 0,
+                  backgroundColor: 'transparent',
+                  zIndex: 999,
+                },
+                widthBarStyle,
+              ]}>
+              <Canvas
+                style={{
+                  //width: WIDTH_SCREEN,
+                  height: 130,
+                }}>
+                <Path
+                  path={
+                    'M8.5 31.8699V45C8.5 46.1046 9.39543 47 10.5 47H161.5V31.8506C161.5 31.6186 161.46 31.3884 161.381 31.1703L153.477 9.31973C153.191 8.52768 152.439 8 151.597 8H18.8757C18.0471 8 17.3043 8.51093 17.008 9.28471L8.63229 31.1546C8.54484 31.3829 8.5 31.6254 8.5 31.8699Z'
+                  }
+                  //color="rgba(235,235,245,0.6)"
+                  //end={0.8}
+                  transform={[{translateX: 50}, {translateY: 73}]}>
+                  <LinearGradient
+                    start={vec(153.5 / 2, 0)}
+                    end={vec(153.5 / 2, 39)}
+                    colors={[
+                      '#4CC6F5',
+                      '#52C9F3',
+                      '#56CBF2',
+                      '#66D2EC',
+                      '#78DAE6',
+                      '#94e7dd',
+                      '#d6f0fd',
+                    ]}
+                  />
+                  <Blur blur={1} />
+                </Path>
+                <Path
+                  path={'M17 14H148L159 33V110L6 111V35L17 14Z'}
+                  color="rgba(235,235,245,0.6)"
+                  transform={[{translateX: 50}, {translateY: 10}]}>
+                  <LinearGradient
+                    start={vec(153 / 2, 97)}
+                    end={vec(153 / 2, 0)}
+                    //colors={['red', 'yellow', 'green', '#4a4653']}
+                    colors={[
+                      '#5daab3',
+                      '#8fb6e6',
+                      '#52C9F3',
+                      '#4a4653',
+                      '#000',
+                    ]}
+                    positions={[0.3, 0.4, 0.5, 1]}
+                  />
+                  <Blur blur={10} />
+                </Path>
+              </Canvas>
+            </Animated.View>
             <Canvas
               style={{
                 width: WIDTH_SCREEN,
@@ -230,7 +336,7 @@ const Charging = () => {
                   positions={[0.05, 0.9]}
                 />
               </Path>
-              <Path
+              {/* <Path
                 path={
                   'M8.5 31.8699V45C8.5 46.1046 9.39543 47 10.5 47H161.5V31.8506C161.5 31.6186 161.46 31.3884 161.381 31.1703L153.477 9.31973C153.191 8.52768 152.439 8 151.597 8H18.8757C18.0471 8 17.3043 8.51093 17.008 9.28471L8.63229 31.1546C8.54484 31.3829 8.5 31.6254 8.5 31.8699Z'
                 }
@@ -264,11 +370,12 @@ const Charging = () => {
                   positions={[0.3, 0.4, 0.5, 1]}
                 />
                 <Blur blur={10} />
-              </Path>
+              </Path> */}
               {font && (
                 <TextSkia
                   font={font}
-                  text={'65%'}
+                  text={`${valueProcessText}%`}
+                  //text={'65%'}
                   x={WIDTH_SCREEN / 2 - 30}
                   y={50}
                   color="#fff"

@@ -1,5 +1,5 @@
 import {View, Text, Dimensions, Pressable} from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import {
   Canvas,
   Box,
@@ -43,6 +43,12 @@ const SCREEN_LIST = [
   },
 ];
 const CustomTabBar = ({state, navigation}) => {
+  const [currentTab, setCurrentTab] = useState(1);
+  const onPressHandler = (item, index) => {
+    //console.log(index);
+    navigation.navigate(item.name);
+    setCurrentTab(index);
+  };
   return (
     <View
       style={{
@@ -104,21 +110,71 @@ const CustomTabBar = ({state, navigation}) => {
                   //borderColor: '#fff',
                   alignItems: 'center',
                   justifyContent: 'center',
-                }}>
-                <Canvas
-                  style={{
-                    //flex: 1,
-                    height: HEIGHT_SCREEN * 0.08,
-                    width: WIDTH_SCREEN / 5,
-                  }}>
-                  <Path
-                    path={item.path}
-                    color="#fff"
-                    transform={[
-                      {translateX: 20},
-                      {translateY: index === 0 ? 30 : 20},
-                    ]}></Path>
-                </Canvas>
+                }}
+                onPress={() => onPressHandler(item, index)}>
+                {currentTab === index ? (
+                  <Canvas
+                    style={{
+                      //flex: 1,
+                      height: HEIGHT_SCREEN * 0.08,
+                      width: WIDTH_SCREEN / 5,
+                      //borderWidth: 1,
+                      //borderColor: '#fff',
+                      //paddingHorizontal: 20,
+                    }}>
+                    <Box
+                      box={rrect(
+                        rect(
+                          18,
+                          18,
+                          WIDTH_SCREEN / 5 - 30,
+                          WIDTH_SCREEN / 5 - 30,
+                        ),
+                        WIDTH_SCREEN / 5,
+                        WIDTH_SCREEN / 5,
+                      )}>
+                      <LinearGradient
+                        start={vec((WIDTH_SCREEN / 5 - 30) / 2, 0)}
+                        end={vec(
+                          (WIDTH_SCREEN / 5 - 30) / 2,
+                          WIDTH_SCREEN / 5 - 30,
+                        )}
+                        colors={['#2FB8FF', '#9EECD9']}
+                        positions={[0.6, 1]}
+                      />
+                      <Blur blur={15} />
+                    </Box>
+                    <Path
+                      path={item.path}
+                      color="#fff"
+                      transform={[
+                        {translateX: 20},
+                        {translateY: index === 0 ? 30 : 20},
+                      ]}>
+                      <LinearGradient
+                        start={vec(44 / 2, 0)}
+                        end={vec(44 / 2, 44)}
+                        colors={['#2FB8FF', '#9EECD9']}
+                        positions={[0.2, 1]}
+                      />
+                    </Path>
+                  </Canvas>
+                ) : (
+                  <Canvas
+                    style={{
+                      //flex: 1,
+                      height: HEIGHT_SCREEN * 0.08,
+                      width: WIDTH_SCREEN / 5,
+                    }}>
+                    <Path
+                      path={item.path}
+                      color="#fff"
+                      transform={[
+                        {translateX: 20},
+                        {translateY: index === 0 ? 30 : 20},
+                      ]}></Path>
+                  </Canvas>
+                )}
               </Pressable>
             );
           if (index === 2)
