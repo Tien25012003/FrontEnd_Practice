@@ -11,11 +11,12 @@ import Calculator_Index from './PracticeUI/CalculatorUI/Calculator_Index';
 import ColorCard_Index from './PracticeUI/ColorCard/ColorCard_Index';
 import Charging from './PracticeUI/RNSkia/Tesla_Skia/Charging';
 import NavigationBottom from './PracticeUI/RNSkia/Tesla_Skia/NavigationBottom';
+import Copilot_Index from './PracticeUI/CopilotUI/Copilot_Index';
 const App = () => {
   return (
     <>
       <StatusBar
-        barStyle={'light-content'}
+        barStyle={'dark-content'}
         backgroundColor={'transparent'}
         translucent
       />
@@ -26,7 +27,8 @@ const App = () => {
       {/* <Calculator_Index /> */}
       {/* <ColorCard_Index /> */}
       {/* <Charging /> */}
-      <NavigationBottom />
+      {/* <NavigationBottom /> */}
+      <Copilot_Index />
     </>
   );
 };
