@@ -12,6 +12,7 @@ import ColorCard_Index from './PracticeUI/ColorCard/ColorCard_Index';
 import Charging from './PracticeUI/RNSkia/Tesla_Skia/Charging';
 import NavigationBottom from './PracticeUI/RNSkia/Tesla_Skia/NavigationBottom';
 import Copilot_Index from './PracticeUI/CopilotUI/Copilot_Index';
+import BarChart from './PracticeUI/ChartUI/BarChart';
 const App = () => {
   return (
     <>
@@ -28,7 +29,26 @@ const App = () => {
       {/* <ColorCard_Index /> */}
       {/* <Charging /> */}
       {/* <NavigationBottom /> */}
-      <Copilot_Index />
+      {/* <Copilot_Index /> */}
+      <View
+        style={{
+          flex: 1,
+          alignItems: 'center',
+          justifyContent: 'center',
+          backgroundColor: '#fff',
+        }}>
+        <BarChart
+          data={[
+            {month: 'Jan', value: 500},
+            {month: 'Feb', value: 400},
+            {month: 'Mar', value: 600},
+            {month: 'Apr', value: 240},
+            {month: 'Jun', value: 600},
+            {month: 'Jul', value: 700},
+            {month: 'Aug', value: 600},
+          ]}
+        />
+      </View>
     </>
   );
 };
