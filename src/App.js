@@ -1,5 +1,5 @@
-import {View, Text, StatusBar} from 'react-native';
-import React from 'react';
+import {View, Text, StatusBar, Button} from 'react-native';
+import React, {useState} from 'react';
 import Profile from './PracticeUI/TabNavigationUI/screens/Profile';
 import Home from './PracticeUI/TabNavigationUI/screens/Home';
 import {Provider} from 'react-redux';
@@ -13,7 +13,12 @@ import Charging from './PracticeUI/RNSkia/Tesla_Skia/Charging';
 import NavigationBottom from './PracticeUI/RNSkia/Tesla_Skia/NavigationBottom';
 import Copilot_Index from './PracticeUI/CopilotUI/Copilot_Index';
 import BarChart from './PracticeUI/ChartUI/BarChart';
+import Calendar_Index from './PracticeUI/CalendarUI/Calendar_Index';
+import moment from 'moment/moment';
+import {ConfigData} from './PracticeUI/CalendarUI/ConfigData';
 const App = () => {
+  const [openCalendar, setOpenCalendar] = useState(false);
+  const [selectedDate, setSelectedDate] = useState(new Date());
   return (
     <>
       <StatusBar
@@ -37,7 +42,7 @@ const App = () => {
           justifyContent: 'center',
           backgroundColor: '#fff',
         }}>
-        <BarChart
+        {/* <BarChart
           data={[
             {month: 'Jan', value: 500},
             {month: 'Feb', value: 400},
@@ -47,7 +52,20 @@ const App = () => {
             {month: 'Jul', value: 700},
             {month: 'Aug', value: 600},
           ]}
+        /> */}
+        <Calendar_Index
+          width={'90%'}
+          open={openCalendar}
+          setOpen={setOpenCalendar}
+          selectedDate={selectedDate}
+          setSelectedDate={setSelectedDate}
         />
+        <Button
+          title="Open calendar"
+          onPress={() => setOpenCalendar(!openCalendar)}
+        />
+        <Text>{moment(selectedDate).format('YYYY-MM-DD')}</Text>
+        {/* <ConfigData /> */}
       </View>
     </>
   );
