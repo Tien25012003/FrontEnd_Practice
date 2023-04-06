@@ -16,6 +16,16 @@ import BarChart from './PracticeUI/ChartUI/BarChart';
 import Calendar_Index from './PracticeUI/CalendarUI/Calendar_Index';
 import moment from 'moment/moment';
 import {ConfigData} from './PracticeUI/CalendarUI/ConfigData';
+import SignUp from './PracticeUI/AWS_Learning/Authentication/SignUp';
+import SignIn from './PracticeUI/AWS_Learning/Authentication/SignIn';
+import signUpConfig from './PracticeUI/AWS_Learning/Authentication/signUpConfig';
+import ForgotPassword from './PracticeUI/AWS_Learning/Authentication/ForgotPassword';
+import AWSNavigation from './PracticeUI/AWS_Learning/Navigation/AWSNavigation';
+import {Amplify, Auth} from 'aws-amplify';
+import {withAuthenticator, AmplifyTheme} from 'aws-amplify-react-native';
+import config from './aws-exports';
+import ConfirmEmail from './PracticeUI/AWS_Learning/Authentication/ConfirmEmail';
+Amplify.configure(config);
 const App = () => {
   const [openCalendar, setOpenCalendar] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -35,40 +45,21 @@ const App = () => {
       {/* <Charging /> */}
       {/* <NavigationBottom /> */}
       {/* <Copilot_Index /> */}
-      <View
-        style={{
-          flex: 1,
-          alignItems: 'center',
-          justifyContent: 'center',
-          backgroundColor: '#fff',
-        }}>
-        {/* <BarChart
-          data={[
-            {month: 'Jan', value: 500},
-            {month: 'Feb', value: 400},
-            {month: 'Mar', value: 600},
-            {month: 'Apr', value: 240},
-            {month: 'Jun', value: 600},
-            {month: 'Jul', value: 700},
-            {month: 'Aug', value: 600},
-          ]}
-        /> */}
-        <Calendar_Index
-          width={'90%'}
-          open={openCalendar}
-          setOpen={setOpenCalendar}
-          selectedDate={selectedDate}
-          setSelectedDate={setSelectedDate}
-        />
-        <Button
-          title="Open calendar"
-          onPress={() => setOpenCalendar(!openCalendar)}
-        />
-        <Text>{moment(selectedDate).format('YYYY-MM-DD')}</Text>
-        {/* <ConfigData /> */}
-      </View>
+      {/* <SignUp /> */}
+      {/* <SignIn /> */}
+      <AWSNavigation />
+      {/* <ForgotPassword /> */}
+      {/* <ConfirmEmail /> */}
     </>
   );
 };
-
+const customTheme = {
+  ...AmplifyTheme,
+  button: {
+    ...AmplifyTheme.button,
+    backgroundColor: 'blue',
+    borderRadius: 10,
+  },
+};
+//export default withAuthenticator(App, {signUpConfig, theme: customTheme});
 export default App;
