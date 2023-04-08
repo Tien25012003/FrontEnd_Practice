@@ -23,9 +23,10 @@ import ForgotPassword from './PracticeUI/AWS_Learning/Authentication/ForgotPassw
 import AWSNavigation from './PracticeUI/AWS_Learning/Navigation/AWSNavigation';
 import {Amplify, Auth} from 'aws-amplify';
 import {withAuthenticator, AmplifyTheme} from 'aws-amplify-react-native';
+
 import config from './aws-exports';
 import ConfirmEmail from './PracticeUI/AWS_Learning/Authentication/ConfirmEmail';
-Amplify.configure(config);
+Amplify.configure({...config, Analytics: {disable: true}});
 const App = () => {
   const [openCalendar, setOpenCalendar] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());

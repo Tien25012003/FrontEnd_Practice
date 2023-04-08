@@ -1,6 +1,7 @@
 import {View, Text, Button, Alert} from 'react-native';
 import React from 'react';
 import {Auth} from 'aws-amplify';
+
 const HomeScreen = ({navigation}) => {
   const onSignOut = async () => {
     try {
@@ -47,6 +48,10 @@ const HomeScreen = ({navigation}) => {
         <Button title="Sign Out" onPress={onSignOut} />
         <Button title="Change Password" onPress={onChangePassword} />
         <Button title="Delete User" onPress={onDeleteUser} />
+        <Button
+          title="Go to module screen"
+          onPress={() => navigation.navigate('ModuleScreen')}
+        />
       </View>
     </View>
   );

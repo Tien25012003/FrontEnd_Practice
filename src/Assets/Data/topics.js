@@ -49,7 +49,7 @@ export default topics = [
   {
     id: '2',
     title: 'If statement',
-    icon: 'https://img.icons8.com/ios/512/if.png',
+    icon: 'https://static.thenounproject.com/png/2698136-200.png',
     level: 2,
     progress: 0.9,
   },
@@ -63,7 +63,7 @@ export default topics = [
   {
     id: '4',
     title: 'Loops',
-    icon: 'https://cdn-icons-png.flaticon.com/512/565/565249.png',
+    icon: 'https://static.thenounproject.com/png/2698136-200.png',
     level: 3,
     progress: 0,
   },

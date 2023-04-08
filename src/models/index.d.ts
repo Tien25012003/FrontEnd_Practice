@@ -6,6 +6,38 @@ import { LazyLoading, LazyLoadingDisabled, AsyncCollection, AsyncItem } from "@a
 
 
 
+type EagerExercise = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<Exercise, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly title: string;
+  readonly url?: string | null;
+  readonly topicID: string;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazyExercise = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<Exercise, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly title: string;
+  readonly url?: string | null;
+  readonly topicID: string;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type Exercise = LazyLoading extends LazyLoadingDisabled ? EagerExercise : LazyExercise
+
+export declare const Exercise: (new (init: ModelInit<Exercise>) => Exercise) & {
+  copyOf(source: Exercise, mutator: (draft: MutableModel<Exercise>) => MutableModel<Exercise> | void): Exercise;
+}
+
 type EagerQuiz = {
   readonly [__modelMeta__]: {
     identifier: ManagedIdentifier<Quiz, 'id'>;
@@ -13,6 +45,7 @@ type EagerQuiz = {
   };
   readonly id: string;
   readonly QuizQuestions?: (QuizQuestion | null)[] | null;
+  readonly name: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -24,6 +57,7 @@ type LazyQuiz = {
   };
   readonly id: string;
   readonly QuizQuestions: AsyncCollection<QuizQuestion>;
+  readonly name: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -115,7 +149,7 @@ type EagerTopic = {
   readonly level: number;
   readonly description?: string | null;
   readonly Resources?: (Resource | null)[] | null;
-  readonly Exercises?: (Resource | null)[] | null;
+  readonly Exercises?: Exercise[] | null;
   readonly Quiz?: Quiz | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
@@ -133,7 +167,7 @@ type LazyTopic = {
   readonly level: number;
   readonly description?: string | null;
   readonly Resources: AsyncCollection<Resource>;
-  readonly Exercises: AsyncCollection<Resource>;
+  readonly Exercises: AsyncCollection<Exercise>;
   readonly Quiz: AsyncItem<Quiz | undefined>;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
