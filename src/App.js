@@ -21,9 +21,8 @@ import SignIn from './PracticeUI/AWS_Learning/Authentication/SignIn';
 import signUpConfig from './PracticeUI/AWS_Learning/Authentication/signUpConfig';
 import ForgotPassword from './PracticeUI/AWS_Learning/Authentication/ForgotPassword';
 import AWSNavigation from './PracticeUI/AWS_Learning/Navigation/AWSNavigation';
-import {Amplify, Auth} from 'aws-amplify';
+import {Amplify, Auth, API} from 'aws-amplify';
 import {withAuthenticator, AmplifyTheme} from 'aws-amplify-react-native';
-
 import config from './aws-exports';
 import ConfirmEmail from './PracticeUI/AWS_Learning/Authentication/ConfirmEmail';
 Amplify.configure({...config, Analytics: {disable: true}});

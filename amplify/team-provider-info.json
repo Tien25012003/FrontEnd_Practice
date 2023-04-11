@@ -17,6 +17,9 @@
       },
       "storage": {
         "s3awslearning1122": {}
+      },
+      "api": {
+        "AWSLearning": {}
       }
     }
   }

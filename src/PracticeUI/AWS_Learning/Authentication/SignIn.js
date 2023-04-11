@@ -11,15 +11,37 @@ import {
   Image,
   Alert,
   ActivityIndicator,
+  Button,
 } from 'react-native';
-import React from 'react';
-import {Auth} from 'aws-amplify';
+import React, {useEffect} from 'react';
+import {Auth, Amplify, Hub} from 'aws-amplify';
 
 const SignIn = ({navigation}) => {
   const [userName, setUserName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const [user, setUser] = useState(null);
+  const [customState, setCustomState] = useState(null);
+  // useEffect(() => {
+  //   const unsubscribe = Hub.listen('auth', ({payload: {event, data}}) => {
+  //     switch (event) {
+  //       case 'signIn':
+  //         setUser(data);
+  //         break;
+  //       case 'signOut':
+  //         setUser(null);
+  //         break;
+  //       case 'customOAuthState':
+  //         setUser(data);
+  //     }
+  //   });
+  //   Auth.currentAuthenticatedUser()
+  //     .then(currentUser => setUser(currentUser))
+  //     .catch(e => console.log(e));
+  //   return unsubscribe;
+  // });
+
   const onSignIn = async () => {
     if (loading) {
       return;
@@ -40,6 +62,13 @@ const SignIn = ({navigation}) => {
     setLoading(false);
   };
   //console.log(userName);
+  //console.log(user && user.attributes.name);
+  const onGoogleSignIn = async () => {
+    await Auth.federatedSignIn({provider: 'Google'}).then(user => {
+      console.log('sign in');
+    });
+    await Auth.currentAuthenticatedUser(user => console.log(user));
+  };
   return (
     <KeyboardAvoidingView
       style={{
@@ -162,6 +191,9 @@ const SignIn = ({navigation}) => {
             </Text>
           </TouchableOpacity>
         </View>
+        <Button title="Google" onPress={onGoogleSignIn} />
+        <Button title="SignOut" onPress={() => Auth.signOut()} />
+        {/* <Text>{user && user.attributes.name}</Text> */}
       </ScrollView>
     </KeyboardAvoidingView>
   );
