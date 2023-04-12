@@ -1,8 +1,21 @@
 import {View, Text, Button, Alert} from 'react-native';
-import React from 'react';
-import {Auth} from 'aws-amplify';
+import React, {useState, useEffect} from 'react';
+import {Auth, API, graphqlOperation, Hub} from 'aws-amplify';
+import {listTopics} from '../../../graphql/queries';
+import {DataStore, syncExpression} from 'aws-amplify';
+import {Exercise, Topic} from '../../../models';
 
 const HomeScreen = ({navigation}) => {
+  const [localData, setLocalData] = useState(null);
+  // useEffect(() => {
+  //   DataStore.configure({
+  //     syncExpressions: [
+  //       syncExpression(Exercise, () => {
+  //         return data => data.title.eq('Exercises update');
+  //       }),
+  //     ],
+  //   });
+  // }, []);
   const onSignOut = async () => {
     try {
       await Auth.signOut();
@@ -28,6 +41,25 @@ const HomeScreen = ({navigation}) => {
       console.log('Error deleting user', error);
     }
   };
+  const onFetchData = async () => {
+    const topic = await API.graphql(graphqlOperation(listTopics));
+    console.log('API', topic.data.listTopics.items);
+  };
+  const fetchDataStore = async () => {
+    await DataStore.query(Topic)
+      .then(q => {
+        console.log('DataStore', q);
+      })
+      .catch(e => console.log(e));
+  };
+  const clearDataStore = async () => {
+    await DataStore.clear();
+  };
+  // Hub.listen('auth', async data => {
+  //   if (data.payload.event === 'signOut') {
+  //     await DataStore.clear().then(() => console.log('clear data store'));
+  //   }
+  // });
   return (
     <View
       style={{
@@ -52,6 +84,9 @@ const HomeScreen = ({navigation}) => {
           title="Go to module screen"
           onPress={() => navigation.navigate('ModuleScreen')}
         />
+        <Button title="Fetch Data From the API" onPress={onFetchData} />
+        <Button title="Fetch Data From DataStore" onPress={fetchDataStore} />
+        <Button title="Clear DataStore" onPress={clearDataStore} />
       </View>
     </View>
   );

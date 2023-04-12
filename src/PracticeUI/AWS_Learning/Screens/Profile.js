@@ -13,7 +13,8 @@ const Profile = ({navigation}) => {
   const onCreate = async () => {
     await DataStore.save(
       new Exercise({
-        title: 'New Exercise about JavaScript',
+        id: '7128a301-ff16-400d-838b-2c4023fcb922',
+        title: 'New Exercise about JavaScript Update',
         topicID: 'bba66671-b838-42eb-bd36-1c0fe8c8cbd7',
       }),
     )
@@ -29,6 +30,25 @@ const Profile = ({navigation}) => {
       .then(() => console.log('delete successfully'))
       .catch(e => console.log(e));
   };
+  const onQuery = async () => {
+    await DataStore.query(
+      Exercise,
+      '7128a301-ff16-400d-838b-2c4023fcb922',
+    ).then(data => {
+      console.log(data);
+    });
+  };
+  const onUpdate = async () => {
+    const original = await DataStore.query(
+      Exercise,
+      '7128a301-ff16-400d-838b-2c4023fcb922',
+    );
+    await DataStore.save(
+      Exercise.copyOf(original, updated => {
+        updated.title = 'Exercises update';
+      }),
+    ).then(() => console.log('sucessfully updated'));
+  };
   return (
     <View
       style={{
@@ -40,6 +60,12 @@ const Profile = ({navigation}) => {
       <Text>Profile</Text>
       <Button title="Create new data on local" onPress={onCreate} />
       <Button title="Delete data on local" onPress={onDelete} />
+      <Button title="Query data" onPress={onQuery} />
+      <Button title="Update data" onPress={onUpdate} />
+      <Button
+        title="Go to home screen"
+        onPress={() => navigation.navigate('HomeScreen')}
+      />
     </View>
   );
 };
