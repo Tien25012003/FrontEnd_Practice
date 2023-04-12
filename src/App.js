@@ -15,21 +15,8 @@ import Copilot_Index from './PracticeUI/CopilotUI/Copilot_Index';
 import BarChart from './PracticeUI/ChartUI/BarChart';
 import Calendar_Index from './PracticeUI/CalendarUI/Calendar_Index';
 import moment from 'moment/moment';
-import {ConfigData} from './PracticeUI/CalendarUI/ConfigData';
-import SignUp from './PracticeUI/AWS_Learning/Authentication/SignUp';
-import SignIn from './PracticeUI/AWS_Learning/Authentication/SignIn';
-import signUpConfig from './PracticeUI/AWS_Learning/Authentication/signUpConfig';
-import ForgotPassword from './PracticeUI/AWS_Learning/Authentication/ForgotPassword';
-import AWSNavigation from './PracticeUI/AWS_Learning/Navigation/AWSNavigation';
 import FunnyScroll from './PracticeUI/FunnyScrollView/FunnyScroll';
-import {Amplify, Auth, API} from 'aws-amplify';
-import {withAuthenticator, AmplifyTheme} from 'aws-amplify-react-native';
-import config from './aws-exports';
-import HomeScreen from './PracticeUI/AWS_Learning/Screens/HomeScreen';
-import ModuleScreen from './PracticeUI/AWS_Learning/Screens/ModuleScreen';
-import ConfirmEmail from './PracticeUI/AWS_Learning/Authentication/ConfirmEmail';
 
-Amplify.configure({...config, Analytics: {disable: true}});
 const App = () => {
   const [openCalendar, setOpenCalendar] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -51,22 +38,14 @@ const App = () => {
       {/* <Copilot_Index /> */}
       {/* <SignUp /> */}
       {/* <SignIn /> */}
-      <AWSNavigation />
       {/* <ForgotPassword /> */}
       {/* <ConfirmEmail /> */}
-      {/* <FunnyScroll /> */}
+      <FunnyScroll />
       {/* <HomeScreen /> */}
       {/* <ModuleScreen /> */}
     </>
   );
 };
-const customTheme = {
-  ...AmplifyTheme,
-  button: {
-    ...AmplifyTheme.button,
-    backgroundColor: 'blue',
-    borderRadius: 10,
-  },
-};
+
 //export default withAuthenticator(App, {signUpConfig, theme: customTheme});
 export default App;

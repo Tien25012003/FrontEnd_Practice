@@ -287,10 +287,10 @@ const FunnyScroll = () => {
                         <LinearGradient id="grad" x1="0" y1="0" x2="1" y2="0">
                           <Stop
                             offset="0"
-                            stopColor="hsl(0,0%,80%)"
+                            stopColor="hsl(0,0%,70%)"
                             stopOpacity="1"
                           />
-                          <Stop offset="1" stopColor="#000" stopOpacity="1" />
+                          <Stop offset="0.6" stopColor="#000" stopOpacity="1" />
                         </LinearGradient>
                       </Defs>
                       <Rect
