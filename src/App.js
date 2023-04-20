@@ -16,7 +16,9 @@ import BarChart from './PracticeUI/ChartUI/BarChart';
 import Calendar_Index from './PracticeUI/CalendarUI/Calendar_Index';
 import moment from 'moment/moment';
 import FunnyScroll from './PracticeUI/FunnyScrollView/FunnyScroll';
-
+import ScrollAnimated from './PracticeUI/AnimatedUI/ScrollAnimated';
+import RotateUI from './PracticeUI/AnimatedUI/RotateUI';
+import Carousel from './PracticeUI/AnimatedUI/Carousel';
 const App = () => {
   const [openCalendar, setOpenCalendar] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -27,25 +29,12 @@ const App = () => {
         backgroundColor={'transparent'}
         translucent
       />
-      {/* <NavigationRoot /> */}
-      {/* <Rocket_Index /> */}
-      {/* <Login_Index /> */}
-      {/* <Food_Index /> */}
-      {/* <Calculator_Index /> */}
-      {/* <ColorCard_Index /> */}
-      {/* <Charging /> */}
-      {/* <NavigationBottom /> */}
-      {/* <Copilot_Index /> */}
-      {/* <SignUp /> */}
-      {/* <SignIn /> */}
-      {/* <ForgotPassword /> */}
-      {/* <ConfirmEmail /> */}
-      <FunnyScroll />
-      {/* <HomeScreen /> */}
-      {/* <ModuleScreen /> */}
+
+      {/* <RotateUI /> */}
+      {/* <ScrollAnimated /> */}
+      <Carousel />
     </>
   );
 };
 
-//export default withAuthenticator(App, {signUpConfig, theme: customTheme});
 export default App;
