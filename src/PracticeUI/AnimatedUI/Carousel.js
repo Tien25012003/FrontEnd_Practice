@@ -15,39 +15,7 @@ const ITEM_SIZE = width * 0.7;
 const SPACER_ITEM_SIZE = (width - ITEM_SIZE) / 2;
 const BACKDROP_HEIGHT = height * 0.6;
 const Carousel = () => {
-  const [movies, setMovies] = useState([]);
   const scrollX = useRef(new Animated.Value(0)).current;
-  const getMovies = async () => {
-    const options = {
-      method: 'GET',
-      headers: {
-        'X-RapidAPI-Key': '96c43b9945msh8a065734810c0b1p1df150jsn4c0434caab79',
-        'X-RapidAPI-Host': 'moviesdatabase.p.rapidapi.com',
-      },
-    };
-    const {results} = await fetch(
-      'https://moviesdatabase.p.rapidapi.com/titles/x/titles-by-ids?idsList=tt0001702%2Ctt0001856%2Ctt0001856',
-      options,
-    )
-      .then(response => response.json())
-      .catch(err => console.error(err));
-
-    const tmp = results.map((item, index) => ({
-      key: Math.random(),
-      rating: Math.floor(Math.random() * (10 - 5 + 1)) + 5,
-      ...item,
-    }));
-    const tmp1 = results.map((item, index) => ({
-      key: Math.random(),
-      rating: Math.floor(Math.random() * (10 - 5 + 1)) + 5,
-      ...item,
-    }));
-    setMovies([...tmp, ...tmp1]);
-  };
-  useEffect(() => {
-    getMovies();
-  }, []);
-  //console.log(movies);
   let position = Animated.divide(scrollX, ITEM_SIZE);
   const renderItem = ({item, index}) => {
     const transY = position.interpolate({
@@ -145,7 +113,7 @@ const Carousel = () => {
         backgroundColor: '#fff',
       }}>
       <View style={{position: 'absolute', height: BACKDROP_HEIGHT}}>
-        {movies.map((_, index) => {
+        {[...new Array(10)].map((_, index) => {
           const transX = position.interpolate({
             inputRange: [index, index + 1],
             outputRange: [0, -width],
@@ -176,7 +144,7 @@ const Carousel = () => {
       </View>
 
       <Animated.FlatList
-        data={movies}
+        data={[...new Array(10)]}
         onScroll={Animated.event(
           [{nativeEvent: {contentOffset: {x: scrollX}}}],
           {useNativeDriver: true},
