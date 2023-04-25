@@ -19,6 +19,9 @@ import FunnyScroll from './PracticeUI/FunnyScrollView/FunnyScroll';
 import ScrollAnimated from './PracticeUI/AnimatedUI/ScrollAnimated';
 import RotateUI from './PracticeUI/AnimatedUI/RotateUI';
 import Carousel from './PracticeUI/AnimatedUI/Carousel';
+import WaterWave from './PracticeUI/AnimatedUI/WaterWave';
+import Draft from './Draft';
+import PhoneRing from './PracticeUI/AnimatedUI/PhoneRing';
 const App = () => {
   const [openCalendar, setOpenCalendar] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -32,7 +35,10 @@ const App = () => {
 
       {/* <RotateUI /> */}
       {/* <ScrollAnimated /> */}
-      <Carousel />
+      {/* <Carousel /> */}
+      {/* <WaterWave /> */}
+      {/* <Draft /> */}
+      <PhoneRing />
     </>
   );
 };
