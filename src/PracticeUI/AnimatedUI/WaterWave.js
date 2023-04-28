@@ -27,20 +27,20 @@ const WaterWave = () => {
   const data = useDerivedValue(() => {
     return {
       from: {
-        x: interpolate(progress.value, [0, 1], [-0.1, -1]),
-        y: interpolate(progress.value, [0, 1], [0.3, 1]),
+        x: interpolate(progress.value, [0, 1], [-0.1, -0.1]),
+        y: interpolate(progress.value, [0, 1], [0.3, 0.7]),
       },
       c1: {
-        x: interpolate(progress.value, [0, 1], [0.5, 0]),
-        y: interpolate(progress.value, [0, 1], [0.3, 0.5]),
+        x: interpolate(progress.value, [0, 1], [0.5, 0.5]),
+        y: interpolate(progress.value, [0, 1], [0.3, 0.7]),
       },
       c2: {
-        x: interpolate(progress.value, [0, 1], [0.5, 1]),
-        y: interpolate(progress.value, [0, 1], [0.7, 0.5]),
+        x: interpolate(progress.value, [0, 1], [0.5, 0.5]),
+        y: interpolate(progress.value, [0, 1], [0.7, 0.3]),
       },
       to: {
-        x: interpolate(progress.value, [0, 1], [1.1, 2]),
-        y: interpolate(progress.value, [0, 1], [0.7, 0]),
+        x: interpolate(progress.value, [0, 1], [1.1, 1.1]),
+        y: interpolate(progress.value, [0, 1], [0.7, 0.3]),
       },
     };
   });
@@ -53,20 +53,20 @@ const WaterWave = () => {
   const path1 = useAnimatedProps(() => {
     const {from, c1, c2, to} = {
       from: {
-        x: interpolate(1 - progress.value, [0, 1], [-0.1, -1]),
-        y: interpolate(1 - progress.value, [0, 1], [0.3, 1]),
+        x: interpolate(1 - progress.value, [0, 1], [-0.1, -0.1]),
+        y: interpolate(1 - progress.value, [0, 1], [0.3, 0.7]),
       },
       c1: {
-        x: interpolate(1 - progress.value, [0, 1], [0.5, 0]),
-        y: interpolate(1 - progress.value, [0, 1], [0.3, 0.5]),
+        x: interpolate(1 - progress.value, [0, 1], [0.5, 0.5]),
+        y: interpolate(1 - progress.value, [0, 1], [0.3, 0.7]),
       },
       c2: {
-        x: interpolate(1 - progress.value, [0, 1], [0.5, 1]),
-        y: interpolate(1 - progress.value, [0, 1], [0.7, 0.5]),
+        x: interpolate(1 - progress.value, [0, 1], [0.5, 0.5]),
+        y: interpolate(1 - progress.value, [0, 1], [0.7, 0.3]),
       },
       to: {
-        x: interpolate(1 - progress.value, [0, 1], [1.1, 2]),
-        y: interpolate(1 - progress.value, [0, 1], [0.7, 0]),
+        x: interpolate(1 - progress.value, [0, 1], [1.1, 1.1]),
+        y: interpolate(1 - progress.value, [0, 1], [0.7, 0.3]),
       },
     };
     return {

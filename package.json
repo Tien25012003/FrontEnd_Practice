@@ -36,6 +36,7 @@
     "react-native-swipe-gestures": "^1.0.5",
     "react-native-vector-icons": "^9.2.0",
     "react-redux": "^8.0.5",
+    "rive-react-native": "^4.0.2",
     "victory-native": "^36.6.8"
   },
   "devDependencies": {

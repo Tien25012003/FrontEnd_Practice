@@ -22,6 +22,13 @@ import Carousel from './PracticeUI/AnimatedUI/Carousel';
 import WaterWave from './PracticeUI/AnimatedUI/WaterWave';
 import Draft from './Draft';
 import PhoneRing from './PracticeUI/AnimatedUI/PhoneRing';
+import Rive_index from './PracticeUI/RiveUI/Rive_index';
+import Rive, {Fit} from 'rive-react-native';
+import CalendarReno from './PracticeUI/CalendarReno/CalendarReno';
+import DataConfig from './PracticeUI/CalendarReno/DataConfig';
+import WaterDrop from './PracticeUI/AnimatedUI/WaterDrop';
+import Index_Calendar from './PracticeUI/CalendarReno/Index_Calendar';
+import CalendarNumber from './PracticeUI/CalendarReno/CalendarNumber';
 const App = () => {
   const [openCalendar, setOpenCalendar] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -38,7 +45,25 @@ const App = () => {
       {/* <Carousel /> */}
       {/* <WaterWave /> */}
       {/* <Draft /> */}
-      <PhoneRing />
+      {/* <PhoneRing /> */}
+      {/* <Rive_index /> */}
+      {/* <Rive
+        resourceName="weather_app"
+        //url="https://rive.app/community/3113-6567-weather-app-demo"
+        artboardName="proto1"
+        stateMachineName={'State Machine 1'}
+        autoplay={true}
+        style={{
+          width: 400,
+          height: 400,
+        }}
+        fit={Fit.Contain}
+      />
+      <Text>AAA</Text> */}
+      {/* <CalendarReno /> */}
+      {/* <DataConfig /> */}
+      <Index_Calendar />
+      {/* <WaterDrop /> */}
     </>
   );
 };

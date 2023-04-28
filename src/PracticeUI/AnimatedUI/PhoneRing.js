@@ -1,7 +1,6 @@
 import {View, Text, StyleSheet, Animated} from 'react-native';
 import React, {useRef, useEffect} from 'react';
 import Feather from 'react-native-vector-icons/Feather';
-import {interpolate} from 'react-native-reanimated';
 const PhoneRing = () => {
   const animatedValue = [...new Array(3)].map(
     (_, i) => useRef(new Animated.Value(0)).current,
