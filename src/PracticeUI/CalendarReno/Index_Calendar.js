@@ -8,10 +8,10 @@ import {
 } from 'react-native';
 import React, {useState} from 'react';
 import CalendarReno from './CalendarReno';
-import CalendarNumber from './CalendarNumber';
 import Reno from './Reno';
 import moment from 'moment/moment';
 import ConditonCalendar from '../ConditionCalendar/ConditonCalendar';
+import CalendarNumber from '../CalendarUI/CalendarNumber';
 const Index_Calendar = () => {
   const [openCalendar, setOpenCalendar] = useState(false);
   const [datePicker, setDatePicker] = useState(new Date());
@@ -21,6 +21,8 @@ const Index_Calendar = () => {
   const [From2, setFrom2] = useState(new Date('2023-05-03'));
   const [visible1, setVisible1] = useState(false);
   const [FromDate, setFromDate] = useState(new Date());
+  const [openNumber, setOpenNumber] = useState(false);
+  const date = new Date();
   //console.log('outside: ', From);
   //console.log('outside: ', FromDate.toDateString());
   return (
@@ -35,6 +37,7 @@ const Index_Calendar = () => {
       <Button title="OpenCalendar" onPress={() => setOpenCalendar(true)} />
       <Button title="Open" onPress={() => setVisible(true)} />
       <Button title="Open1" onPress={() => setVisible1(true)} />
+      <Button title="Open2" onPress={() => setOpenNumber(true)} />
       {/* <Button
         title="Edit"
         onPress={() => {
@@ -87,6 +90,7 @@ const Index_Calendar = () => {
         setOpen={setOpenCalendar}
         setDatePicker={setDatePicker}
       />
+      <CalendarNumber open={openNumber} setOpen={setOpenNumber} />
     </View>
   );
 };

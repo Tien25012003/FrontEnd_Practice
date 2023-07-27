@@ -91,7 +91,7 @@ const reducer = (state, action) => {
       break;
   }
 };
-const Reno = ({open, setOpen, setDatePicker, enablePast = false, FromDate}) => {
+const Reno = ({open, setOpen, setDatePicker, enablePast = true, FromDate}) => {
   const [state, dispatch] = useReducer(reducer, {
     selectedDate: FromDate,
     currentDate: FromDate,

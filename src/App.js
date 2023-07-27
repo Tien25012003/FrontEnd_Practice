@@ -28,10 +28,9 @@ import CalendarReno from './PracticeUI/CalendarReno/CalendarReno';
 import DataConfig from './PracticeUI/CalendarReno/DataConfig';
 import WaterDrop from './PracticeUI/AnimatedUI/WaterDrop';
 import Index_Calendar from './PracticeUI/CalendarReno/Index_Calendar';
-import CalendarNumber from './PracticeUI/CalendarReno/CalendarNumber';
+import TabbarReflect from './PracticeUI/TabbarReflect/TabbarReflect';
+import Reno from './PracticeUI/CalendarReno/Reno';
 const App = () => {
-  const [openCalendar, setOpenCalendar] = useState(false);
-  const [selectedDate, setSelectedDate] = useState(new Date());
   return (
     <>
       <StatusBar
@@ -46,7 +45,7 @@ const App = () => {
       {/* <WaterWave /> */}
       {/* <Draft /> */}
       {/* <PhoneRing /> */}
-      {/* <Rive_index /> */}
+      <Rive_index />
       {/* <Rive
         resourceName="weather_app"
         //url="https://rive.app/community/3113-6567-weather-app-demo"
@@ -62,8 +61,9 @@ const App = () => {
       <Text>AAA</Text> */}
       {/* <CalendarReno /> */}
       {/* <DataConfig /> */}
-      <Index_Calendar />
+      {/* <Index_Calendar /> */}
       {/* <WaterDrop /> */}
+      {/* <TabbarReflect /> */}
     </>
   );
 };

@@ -24,6 +24,7 @@
     "aws-amplify": "^5.0.24",
     "aws-amplify-react-native": "^7.0.2",
     "core-js": "^3.30.0",
+    "dayjs": "^1.11.7",
     "lottie-react-native": "^5.1.5",
     "moment": "^2.29.4",
     "react": "18.1.0",
@@ -36,7 +37,7 @@
     "react-native-swipe-gestures": "^1.0.5",
     "react-native-vector-icons": "^9.2.0",
     "react-redux": "^8.0.5",
-    "rive-react-native": "^4.0.2",
+    "rive-react-native": "^3.0.41",
     "victory-native": "^36.6.8"
   },
   "devDependencies": {

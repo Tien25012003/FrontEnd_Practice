@@ -27,7 +27,7 @@ const ConditionCalendar = ({
   setOpen,
   setDatePicker,
   enablePast = false,
-  FromDate = new Date(),
+  FromDate,
 }) => {
   const [openDropDown, setOpenDropDown] = useState(false);
   const [selectedDate, setSelectedDate] = useState(FromDate);
